@@ -1,12 +1,51 @@
 # Commander.js
 
   The complete solution for [node.js](http://nodejs.org) command-line interfaces, inspired by Ruby's [commander](https://github.com/visionmedia/commander).
+  
+  Fork from the original project: *visionmedia commander.js*.
+  
+  Main changes:
+  - Multi-level options:
+
+```js
+#!/usr/bin/env node
+program
+.option('-p, --peppers.name', 'Add peppers name')
+.option('-c, --bbq.sauce.type', 'Sauce type for the bbq')
+.option('-o, --onion', 'Onions')
+.parse(process.argv);
+```
+
+- Access to the values (concrete value / all the values):
+
+```js
+#!/usr/bin/env node
+var peppersName = program.getValue("peppers.name");
+
+// > "peppers.name" option value
+
+var values = program.getValues();
+
+// > an object with all the values
+//{
+//  peppers: {
+//    name: ""
+//  },
+//  bbq: {
+//    sauce: {
+//      type: ""
+//    }
+//  },
+//  onion: ""
+//}
+
+```
 
  [![Build Status](https://secure.travis-ci.org/visionmedia/commander.js.png)](http://travis-ci.org/visionmedia/commander.js)
 
 ## Installation
 
-    $ npm install commander
+  Download the ZIP and extract it into the *node_modules* folder.
 
 ## Option parsing
 
@@ -23,16 +62,16 @@ var program = require('commander');
 
 program
   .version('0.0.1')
-  .option('-p, --peppers', 'Add peppers')
-  .option('-P, --pineapple', 'Add pineapple')
-  .option('-b, --bbq', 'Add bbq sauce')
-  .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
+  .option('-p, --peppers.name', 'Add peppers name')
+  .option('-c, --bbq.sauce.type', 'Sauce type for the bbq')
+  .option('-o, --onion', 'Onions')
+  .option('-h, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
   .parse(process.argv);
 
 console.log('you ordered a pizza with:');
-if (program.peppers) console.log('  - peppers');
-if (program.pineapple) console.log('  - pineappe');
-if (program.bbq) console.log('  - bbq');
+if (program.getValue("peppers.name")) console.log('  - peppers name');
+if (program.getValue("bbq.sauce.type")) console.log('  - bbq sauce type');
+if (program.getValue("onion")) console.log('  - onion');
 console.log('  - %s cheese', program.cheese);
 ```
 
@@ -79,12 +118,12 @@ program
   .option('-o, --optional [value]', 'An optional value')
   .parse(process.argv);
 
-console.log(' int: %j', program.integer);
-console.log(' float: %j', program.float);
-console.log(' optional: %j', program.optional);
+console.log(' int: %j', program.getValue("integer"));
+console.log(' float: %j', program.getValue("float"));
+console.log(' optional: %j', program.getValue("optional"));
 program.range = program.range || [];
-console.log(' range: %j..%j', program.range[0], program.range[1]);
-console.log(' list: %j', program.list);
+console.log(' range: %j..%j', program.getValue("range")[0], program.getValue("range")[1]);
+console.log(' list: %j', program.getValue("list"));
 console.log(' args: %j', program.args);
 ```
 
