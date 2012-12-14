@@ -22,7 +22,23 @@ program
 #!/usr/bin/env node
 var peppersName = program.getValue("peppers.name");
 
+// > "peppers.name" option value
+
 var values = program.getValues();
+
+// > an object with all the values
+//{
+//  peppers: {
+//    name: ""
+//  },
+//  bbq: {
+//    sauce: {
+//      type: ""
+//    }
+//  },
+//  onion: ""
+//}
+
 ```
 
  [![Build Status](https://secure.travis-ci.org/visionmedia/commander.js.png)](http://travis-ci.org/visionmedia/commander.js)
