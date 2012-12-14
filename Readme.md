@@ -1,12 +1,45 @@
 # Commander.js
 
   The complete solution for [node.js](http://nodejs.org) command-line interfaces, inspired by Ruby's [commander](https://github.com/visionmedia/commander).
+  
+  Fork from the original project: *visionmedia commander.js*.
+  
+  Main changes:
+  - Multi-level options:
+
+```js
+program
+.option('-p, --peppers.name', 'Add peppers name')
+.option('-c, --bbq.sauce.type', 'Sauce type for the bbq')
+.option('-c, --onion', 'Onions')
+.parse(process.argv);
+```
+
+- Get a concrete value and all the values:
+```js
+// getValue(name):
+program.getValue("peppers.name"); // get the -p option value
+
+// getValues():
+program.getValues();
+//{
+//  peppers: {
+//    name: ""
+//  },
+//  bbq: {
+//    sauce: {
+//      type: ""
+//    }
+//  },
+//  onion: ""
+//}
+```
 
  [![Build Status](https://secure.travis-ci.org/visionmedia/commander.js.png)](http://travis-ci.org/visionmedia/commander.js)
 
 ## Installation
 
-    $ npm install commander
+  Download the ZIP and extract it into the *node_modules* folder.
 
 ## Option parsing
 
