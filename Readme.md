@@ -8,31 +8,21 @@
   - Multi-level options:
 
 ```js
+#!/usr/bin/env node
 program
 .option('-p, --peppers.name', 'Add peppers name')
 .option('-c, --bbq.sauce.type', 'Sauce type for the bbq')
-.option('-c, --onion', 'Onions')
+.option('-o, --onion', 'Onions')
 .parse(process.argv);
 ```
 
-- Get a concrete value and all the values:
-```js
-// getValue(name):
-program.getValue("peppers.name"); // get the -p option value
+- Access to the values (concrete value / all the values):
 
-// getValues():
-program.getValues();
-//{
-//  peppers: {
-//    name: ""
-//  },
-//  bbq: {
-//    sauce: {
-//      type: ""
-//    }
-//  },
-//  onion: ""
-//}
+```js
+#!/usr/bin/env node
+var peppersName = program.getValue("peppers.name");
+
+var values = program.getValues();
 ```
 
  [![Build Status](https://secure.travis-ci.org/visionmedia/commander.js.png)](http://travis-ci.org/visionmedia/commander.js)
